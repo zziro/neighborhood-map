@@ -1,49 +1,53 @@
-h2 {
-	padding-left: 3%;
-}
-
-#maintitle {
-	left: 20%;
-}
-
-
 #map {
 	padding-left: 2%;
 	height:700px;
 	width: 65%;
 	padding: 2%;
-	border-style: solid;
+	
 }
 
-
-#searchlist {
-	padding-left: 2%;
-	padding-right:2%;
-}
 
 #container {
 	height: 100%;
 	padding: 3%;
 }
 
-#bodycontainer {
-	height: 100%;
-	padding-left: 0%;
-	padding-top:1.5%;
+#bodycontainer {	
 	display: flex;
 }
  
- #searchlist {
-	padding-left:0%; 
+ #searchlist {		
+	padding-right:2%;
 	width: 30%;
 }
  
-#custom-search-input button {
-	background: none;
-	border: 0;
+#custom-search-input button {	
 	padding: 1.5% 3%;
 	margin-top: 2%;
 	position: relative;
 	left: -30px;
-	color:#0099CC;
+	
+}
+
+.header {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+  min-height: 56px;
+  transition: min-height 0.3s;
+}
+
+.header-inner {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+.header-title {
+  color: #2d3c49;  
+  font-weight: 300;
+  font-size: 4em;
+  margin: 0.5em 0.25em;
+  text-align: left;
+  padding-left: 2%;
+  padding-right:2%;
 }
