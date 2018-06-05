@@ -1,221 +1,348 @@
-// JSON to store default places and their info
+const CLIENT_ID = "NDR1ZOVF3Z0MBQQ5JD4MSJP5VV4XJPH3QZ2YYDTMBZOB2FGA";
+const CLIENT_SECRET = "A5WYXL4YFJQX0KUBPIW50B0DBW5KQA3K5YZQ5MNZ2AJ015US";
 
-var Model = function () {
-	this .defaultLocations = [];
-	
-};
+var appViewModel;
+
+var restaurantArray = [
+            {
+                "name": "Tip Top",
+                "location": {
+                    "address": "Av. Arenales 2499",
+                    "lat": -12.088884211317911,
+                    "lng": -77.03480243682861,                                        
+                    "formattedAddress": [
+                        "Av. Arenales 2499",
+                        "Lince, Lince",
+                        "14",
+                        "Peru"
+                    ]
+                }
+            },
+            {
+                "name": "Belgravia",
+                "location": {
+                    "address": "Av. Arenales 2304",
+                    "lat": -12.087279323951003,
+                    "lng": -77.03521168612379,                                        
+                    "formattedAddress": [
+                        "Av. Arenales 2304",
+                        "Lince, Lince",
+                        "14",
+                        "Peru"
+                    ]
+                }
+                
+            },
+            {
+                "name": "Siete Sopas",
+                "location": {
+                    "address": "Av. Arequipa 2394 - Lince, Lima, PE",
+                    "lat": -12.088067369139226,
+                    "lng": -77.03408327484738,                    
+                    "formattedAddress": [
+                        "Av. Arequipa 2394 - Lince, Lima, PE",
+                        "Lince, Lima",
+                        "Peru"
+                    ]
+                }
+            },
+            {
+                "name": "La Estrellita del Sur",
+                "location": {
+                    "address": "Jr. Pedro Conde 413",
+                    "crossStreet": "esq. Ignacio Merino",
+                    "lat": -12.087839158775465,
+                    "lng": -77.03203202114824,                    
+                    "formattedAddress": [
+                        "Jr. Pedro Conde 413 (esq. Ignacio Merino)",
+                        "Lince, Lince",
+                        "14",
+                        "Peru"
+                    ]
+                }
+            },
+            {
+                "name": "McDonald's",
+                "location": {
+                    "address": "Av. Arenales 2201",
+                    "crossStreet": "C.C. Risso",
+                    "lat": -12.08625755562936,
+                    "lng": -77.03432981843673,                   
+                    "formattedAddress": [
+                        "Av. Arenales 2201 (C.C. Risso)",
+                        "Lince, Lince",
+                        "14",
+                        "Peru"
+                    ]
+                }
+            },
+            {
+                "name": "El Sanguchón",
+                "location": {
+                    "address": "Av. Arenales 284",
+                    "lat": -12.091971807667733,
+                    "lng": -77.03451146744399,                   
+                    "formattedAddress": [
+                        "Av. Arenales 284",
+                        "San Isidro",
+                        "Peru"
+                    ]
+                }
+            },
+            {
+                "name": "Villa Chicken",
+                "location": {
+                    "address": "Av. Arequipa 2399",
+                    "lat": -12.087995018014157,
+                    "lng": -77.03367878879551,                   
+                    "formattedAddress": [
+                        "Av. Arequipa 2399",
+                        "Lince",
+                        "Peru"
+                    ]
+                }
+            },
+            {
+                "name": "La Bodega de la Trattoria",
+                "location": {
+                    "address": "Dos de Mayo 700",
+                    "crossStreet": "Las Palmeras",
+                    "lat": -12.091483466954775,
+                    "lng": -77.03895490686477,                   
+                    "formattedAddress": [
+                        "Dos de Mayo 700 (Las Palmeras)",
+                        "San Isidro, San Isidro",
+                        "Peru"
+                    ]
+                }
+            },
+            {
+                "name": "El Hornero",
+                "location": {
+                    "address": "Av. Dos de Mayo 758",
+                    "crossStreet": "san Isidro",
+                    "lat": -12.091412493316076,
+                    "lng": -77.03941535090337,
+                    "formattedAddress": [
+                        "Av. Dos de Mayo 758 (san Isidro)",
+                        "Lince",
+                        "Peru"
+                    ]
+                }
+            },
+            {
+                "name": "El Carajito",
+                "location": {
+                    "address": "Av. José Leal 825",
+                    "lat": -12.085813358769025,
+                    "lng": -77.04166841241211,
+                    "formattedAddress": [
+                        "Av. José Leal 825",
+                        "Lince, Lince",
+                        "14",
+                        "Peru"
+                    ]
+                }
+            },
+            {
+                "name": "Pollos Hilton",
+                "location": {
+                    "address": "Av. Julio C. Tello 802",
+                    "lat": -12.086657232880633,
+                    "lng": -77.04143475604067,
+                    "formattedAddress": [
+                        "Av. Julio C. Tello 802",
+                        "Lince, Lince",
+                        "Peru"
+                    ]
+                }
+            },
+            {
+                "name": "San Ceferino",
+                "location": {
+                    "address": "Av. Dos de Mayo 793",
+                    "lat": -12.091417900306997,
+                    "lng": -77.03952947413173,
+                    "formattedAddress": [
+                        "Av. Dos de Mayo 793",
+                        "Lince, San Isidro",
+                        "27",
+                        "Peru"
+                    ]
+                }
+            },
+            {
+                "name": "KFC",
+                "location": {
+                    "address": "Av. Arequipa 1980",
+                    "crossStreet": "esq. Bernardo Alcedo",
+                    "lat": -12.084422946063658,
+                    "lng": -77.03447385875401,
+                    "formattedAddress": [
+                        "Av. Arequipa 1980 (esq. Bernardo Alcedo)",
+                        "Lince, Lince",
+                        "14",
+                        "Peru"
+                    ]
+                }
+            },
+            {
+                "name": "Chili's",
+                "location": {
+                    "address": "Av. Dos de Mayo 860",
+                    "lat": -12.091547860417212,
+                    "lng": -77.0402903622021,                
+                    "formattedAddress": [
+                        "Av. Dos de Mayo 860",
+                        "Lince, San Isidro",
+                        "27",
+                        "Peru"
+                    ]
+                }
+            },
+            {
+                "name": "EDO Sushi Bar",
+                "location": {
+                    "address": "Av. Basadre 275",
+                    "crossStreet": "Calle Machayputto",
+                    "lat": -12.093636244443335,
+                    "lng": -77.03467484094024,
+                    "formattedAddress": [
+                        "Av. Basadre 275 (Calle Machayputto)",
+                        "San Isidro",
+                        "Peru"
+                    ]
+                }
+            }
+        ];
 
 
-// Declaring global variables
-
-var model = new Model();
-var marker;
 var map;
-var infowindow;
-
-var namesInListArr = [];
-var namesInListArrCopy = [];
-var latArr = [];
-var lngArr = [];
-var contentInfoArr = [];
 var markers = [];
-var infowindows = [];
 
-var Client_id = "NDR1ZOVF3Z0MBQQ5JD4MSJP5VV4XJPH3QZ2YYDTMBZOB2FGA";
-var Client_secret = "A5WYXL4YFJQX0KUBPIW50B0DBW5KQA3K5YZQ5MNZ2AJ015US";
-var foursquareUrlFirst = 'https://api.foursquare.com/v2/venues/search?categoryId=4d4b7105d754a06374d81259&ll=-12.088593,-77.036646&limit=15&radius=600'
-			+ '&client_id='
-			+ Client_id + '&client_secret='
-			+ Client_secret + '&v=20180604';
+function initApp() {   
+    
+    map = new google.maps.Map(document.getElementById("map"), {
+        center: {
+        lat: -12.088593,
+        lng: -77.036646
+    },
+        zoom: 15
+    });
+    
+    var infoWindow = new google.maps.InfoWindow();
 
-//-------------------------------------------------------------
-// Only 6 default locations are provided rest of the locations 
-// and their info is loaded from FourSquare API
-//-------------------------------------------------------------
+    
+    for (j = 0; j < restaurantArray.length; j++) {
+        (function() {
+            
+            var name = restaurantArray[j].name;
+            var location = restaurantArray[j].location;
 
-var getFoursquareList = function(){
-		
-	$.getJSON(foursquareUrlFirst).done(function(data) {
-		$.each(data.response.venues, function(i,venues){
-			var locJSON =   '<div>' + venues.name + '<br />'							
-								    + venues.location.formattedAddress+
-							'</div>';
-				namesInListArr.push(venues.name);
-				latArr.push(venues.location.lat.toString());
-				lngArr.push(venues.location.lng.toString());
-				contentInfoArr.push(locJSON);
-				namesInListArrCopy.push(venues.name);
-			
-		});
+            
+            var marker = new google.maps.Marker({
+                position: location,
+                map: map,
+                name: name,
+                animation: google.maps.Animation.DROP,
+                address: address
+            });
+            
+            markers.push(marker);
+            appViewModel.restaurantList()[j].marker = marker;
+            marker.addListener('click', function() {                
+                populateInfoWindow(this, infoWindow);                
+                infoWindow.setContent(contentString);
+            });
 
-			ViewModel();
-			initMap();
-			createMarkers(namesInListArr);
-			createInfowindows(namesInListArr);
-			ko.applyBindings(new ViewModel());
-			
-			})
-			.fail(function(error){
-				alert("failed to load page because of error : " + error.status);				
-			});
+            var foursquareUrl = "https://api.foursquare.com/v2/venues/search?categoryId=4d4b7105d754a06374d81259&ll=-12.088593,-77.036646&limit=15&radius=600&client_id=CLIENT_ID&client_secret=CLIENT_SECRET&v=20180604";
+            var venue, address, category, foursquareId, contentString;
+            
+            $.ajax({                
+                url: foursquareUrl,
+                dataType: "json",                
+                success: function(data) {                             
+                    venue = data.response.venues[0];                    
+                    address = venue.location.formattedAddress[0];                    
+                    category = venue.categories[0].name;                    
+                    foursquareId = "https://foursquare.com/v/" + venue.id;                    
+                    contentString = "<div class='name'>" + "Name: " + "<span class='info'>" + name + "</span></div>" +
+                        "<div class='category'>" + "Catergory: " + "<span class='info'>" + category + "</span></div>" +
+                        "<div class='address'>" + "Location: " + "<span class='info'>" + address + "</span></div>" +
+                        "<div class='information'>" + "More info: " + "<a href='" + foursquareId + "'>" + "Click here" + "</a></div>";
 
-	};
-		
+                    marker.contentString;
+                },
+                error: function() {
+                    contentString = "<div class='name'>Data is currently not available. Please try again.</div>";
+                }
+            });
 
-//-------------------------------------------------------------
-//	To apply bindings set name of location as name
-//-------------------------------------------------------------
+        })(j);
 
-var koLocationEntry = function(data) {
-		this.name = data;
-	};
+    }
+}
 
+function populateInfoWindow(marker, infoWindow) {                
+    if (infoWindow.marker != marker) {
+        infoWindow.marker = marker;
+        infoWindow.setContent('<div class="name">' + marker.name + '</div>' + marker.contentString);                    
+        marker.setAnimation(google.maps.Animation.BOUNCE);
+        setTimeout(function() {
+            marker.setAnimation(null);
+        }, 2130);
+        infoWindow.open(map, marker);                    
+        infoWindow.addListener('closeclick', function() {
+            infoWindow.setMarker = null;
+        });
+    }
+} 
 
-//-------------------------------------------------------------
-//	View Model code
-//-------------------------------------------------------------
+function showException() {
+    alert("Map could not be loaded at this moment. Please try again");
+}
 
-var ViewModel  = function() {
-	var self = this;
-	var i;
-	//---------------------------------------------------------------------
-	// view model varibles
-	//---------------------------------------------------------------------
-	self.defaultListItems = [];
-	self.query = ko.observable('');
-
-	
-	
-	for(i = 0; i < namesInListArr.length; i++) {
-			{
-				self.defaultListItems.push(new koLocationEntry(namesInListArr[i]));
-			}
-	}
-	
-	self.defaultKoList = ko.observableArray(self.defaultListItems);
-
-	
-	//---------------------------------------------------------------------
-	// search functionality
-	//---------------------------------------------------------------------	 
-	self.search = function() { 		
-		var data = self.query().toLowerCase();		
-		self.defaultKoList.removeAll();
-
-		for(i = 0; i < namesInListArr.length; i++) {
-			if(namesInListArr[i].toLowerCase().indexOf(data) >= 0) {
-				self.defaultKoList.push(new koLocationEntry(namesInListArr[i]));
-				markers[i].setVisible(true);
-			}else {
-				markers[i].setVisible(false);
-			}
-			
-		}
-	 };
-
-	//---------------------------------------------------------------------
-	// Action for selecting place from the list : 
-	// opens the infowindow and marker bounces of the clicked place 
-	//---------------------------------------------------------------------
-	
-	 self.listClickAction = function(data) {
-			
-			var itemAt = data.name;			
-			for(i = 0; i < namesInListArr.length; i++) {
-				if ( itemAt.toLowerCase() == namesInListArr[i].toLowerCase()){
-					toggleBounce( markers[i]);
-					var infowindow = new google.maps.InfoWindow({
-						content: contentInfoArr[i]
-					});
-					infowindow.open(map, markers[i]);
-					setTimeout(function(){ infowindow.close(); }, 2000);
-				}
-
-		}
-	};
+// Location Constructor
+var Location = function(data) {
+    var self = this;
+    this.name = data.name;
+    this.location = data.location;
+    this.show = ko.observable(true);
 };
 
-//---------------------------------------------------------------------
-// create places map markers
-//---------------------------------------------------------------------
+// VIEW MODEL //
+var AppViewModel = function() {
+    var self = this;    
+    this.restaurantList = ko.observableArray();
+    this.filteredInput = ko.observable('');    
 
-function createMarkers(listArr) {		
-	var i;
-	for (i = 0; i < listArr.length; i++) {				
-		marker = new google.maps.Marker({
-		map: map,
-		draggable: false,
-		animation: google.maps.Animation.DROP,
-		position: {
-			lat: parseFloat(latArr[i]), 
-			lng: parseFloat(lngArr[i])
-		}			
-		});
-		markers.push(marker);
-
-	}
-}
-
-
-//---------------------------------------------------------------------
-// create places infowindows
-//---------------------------------------------------------------------
+    for (i = 0; i < restaurantArray.length; i++) {
+        var place = new Location(restaurantArray[i]);
+        self.restaurantList.push(place);
+    }
     
-function createInfowindows(listArr) {
+    this.searchFilter = ko.computed(function() {
+        var filter = self.filteredInput().toLowerCase();        
+        for (j = 0; j < self.restaurantList().length; j++) {     
+            if (self.restaurantList()[j].name.toLowerCase().indexOf(filter) > -1) {
+                self.restaurantList()[j].show(true);
+                if (self.restaurantList()[j].marker) {
+                    self.restaurantList()[j].marker.setVisible(true); 
+                }
+            } else {
+                self.restaurantList()[j].show(false);
+                if (self.restaurantList()[j].marker) {
+                    self.restaurantList()[j].marker.setVisible(false); 
+                }
+            }
+        }
+    });
 
- for (i = 0; i < listArr.length; i++) {
-	var marker = markers[i];
-	google.maps.event.addListener(marker, 'click', (function(marker, i) {
+    this.showLocation = function(locations) {
+        google.maps.event.trigger(locations.marker, 'click');
+    };
+};
 
-			return function() {		
-				toggleBounce(marker);
-				infowindow.setContent(contentInfoArr[i]);
-				infowindows.push(infowindow);
-				infowindow.open(map, marker);
-				setTimeout(function(){ infowindow.close(); }, 2000);
-			};
-		})(marker, i));
-	}
-}
+appViewModel = new AppViewModel();
 
-
-//---------------------------------------------------------------------
-// animare markers
-//---------------------------------------------------------------------
-
-function toggleBounce(marker) {
-	if (marker.getAnimation() !== null) {
-		marker.setAnimation(null);
-	} else {
-		marker.setAnimation(google.maps.Animation.BOUNCE);
-		setTimeout(function(){ marker.setAnimation(null); }, 2000);
-	}
-}
-
-//-------------------------------------------------------------
-// Initialize Map
-//-------------------------------------------------------------
-
-function initMap() {
-	map = new google.maps.Map(document.getElementById('map'), {
-		zoom: 15,
-		center: {
-			lat: parseFloat(latArr[0]),
-			lng: parseFloat(lngArr[0])
-		}
-	});
-	infowindow = new google.maps.InfoWindow();
-}
-
-function exception() {
-	contentString = "<div class='name'>Data is currently not available. Please try again.</div>";
-}
-
-$(document).ready(function() {
-	//defaultList(loc);
-});
-
-$(document).ready(function() {
-	getFoursquareList();
-
-});
+ko.applyBindings(appViewModel);

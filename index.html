@@ -1,62 +1,39 @@
 <!DOCTYPE html>
+
 <html lang="en">
-	<head>		
-		<meta charset="utf-8">		
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">		
-		<title> Neighborhood Map Project</title>
 
-		<!-- Loading resorces to better UI experiences -->
-		 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>		
-		<link href="css/style.css" rel="stylesheet" type="text/css">
-		
-		<!--Loading Knockout Javascript library -->
-		<script src="js/libs/knockout-3.4.0.js"></script>		
+<head>
+	<meta charset="UTF-8">
 
-		<!--Load app.js file to make application's funcionalities-->
-		<script src="js/app.js"></script>
-
-	</head>
-
-	<body>
-		<header class="header">        
-        <div class="header-inner">        	
-        	<h3 class="header-title">
-          		<p>Neighborhood Restaurant's Map: Lima, Peru</p>          
-        	</h3>
-        </div>
-    </header> 
-
-	<div class="row">				
-		<div class="col-md-12" id = "container">
-			<div class="input-group col-md-12" id="custom-search-input">
-				<input type="text"  
-					placeholder="Search"
-					data-bind="textInput: query, 
-					event: {keyup: search}" autocomplete="on" />
-			</div>
-			<div class="col-md-12" id = "bodycontainer">
-				<div id="searchlist">
-					<div data-bind = "foreach: defaultKoList" >
-						<ul>
-							<li>
-								<a href="#" data-bind = "text: name, click: $parent.listClickAction"></a>
-							</li>
-						</ul>								
-					</div>
-				</div>
-				<div class="map col-md-8" id="map" ></div>
-			</div>
-		</div>
-	</div>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8">
 	
-		<!-- Google Map API Key-->
-		<script async defer
-			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDuKxucpK6fpd_o1b6efP5np46MVa7QPEk&callback=initMap"
-				 onerror="googleError()">
-		</script>
-			
-		</body>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">	
+	
+	<!-- Main CSS Stylesheet -->
+	<link href="css/style.css" rel="stylesheet">
+	
+	<title>Neighborhood Restaurant's Map</title>
+
+</head>
+
+<body>
+
+	<nav class="col-sm-3 col-md-3">
+	<input type="search" id="search-input" placeholder="Search" data-bind="textInput: filteredInput">
+	<ul  data-bind="foreach: restaurantList">
+		<li><a href="#" data-bind="text: name, click: $parent.showLocation,  visible: show"></a></li>
+	</ul>	  	
+	</nav>
+	
+	<div id="map" class="map"></div>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>	
+	<script src="js/app.js"></script>
+	
+   	<script async defer src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDuKxucpK6fpd_o1b6efP5np46MVa7QPEk&callback=initApp" onerror="showException()"></script>
+</body>
+
 </html>
