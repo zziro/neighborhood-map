@@ -3,13 +3,13 @@ Neighborhood maps is an app that allow you to check restaurants that are located
 
 ## Stack technologies:
 
-Knockout: To bing  information into UI
-Bootstrap: For styling
-Jquery: To make callbacks
+Knockout: To bing  information into UI <br />
+Bootstrap: For styling <br />
+Jquery: To make callbacks<br />
 
-Instalation
+## Instalation
 
-## Cloning from git repository:
+### Cloning from git repository:
 
 * Create a local folder (for example: project).
 * Change directory to project folder.
@@ -17,19 +17,19 @@ Instalation
 	git clone https://github.com/zziro/neighborhood-map.git
 * Once you do that, find the index.html file and open it with your. favorite browser.
 
-## Downloading ZIP file
+### Downloading ZIP file
 
 * Download the project clicking on 'Clone or Download' button.
 * Click on Download ZIP.
 * Uncompress the ZIP file and find the index.html.
 * Open  the index.html file and opent it with your browser.
 
-## References:
+### References:
 
-1.- [Knockout Docs]
-2.- [Google Maps API - Events]
-3.- [Foursquare API - venues]
-4.- [Jquery AJAX]
+1.- [Knockout Docs] <br />
+2.- [Google Maps API - Events] <br />
+3.- [Foursquare API - venues] <br />
+4.- [Jquery AJAX] <br />
 
 
 [Google Maps API - Events]:https://developers.google.com/maps/documentation/javascript/examples/event-simple
