@@ -214,8 +214,8 @@ var restaurantArray = [
         ];
 
 //client_id and client_secret 
-var client_id = "X3EKGO02E3FTDXSX5A1QPS3P1A25EGJDZY20G5QFDXXDVHAP";
-var client_secret = "0R2GJ4T0QVZ2WP4F04EDECUFSAGJJCIEQA3ZNMXVKL5OW5RP";
+var client_id = "0OXCBO1IKUOX0CPCP11BONC5LIPHG31BFS5VYJAAQ5IHDJUD";
+var client_secret = "KEIHP2TY2OQJMYIIRZ3WDIUQ03RTCCPG0QWXTAGZR1ZS5JT2";
 
 var map;
 var markers = [];
@@ -288,7 +288,7 @@ function initApp() {
                     marker.contentString;
                 },
                 error: function() {
-                    contentString = "<div class='name'>Data is currently not available. Please try again.</div>";
+                    contentString = "<div class='name'>Unable to load information. Please try later.</div>";
                 }
             });
 
