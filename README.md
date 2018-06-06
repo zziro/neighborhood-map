@@ -3,7 +3,7 @@ Neighborhood maps is an app wihch allow you to check restaurants ocated around y
 
 ## Stack technologies:
 
-Knockout: For bing  information into UI <br />
+Knockout: For binding  information into UI <br />
 Bootstrap: For styling <br />
 Jquery: For making callbacks<br />
 
