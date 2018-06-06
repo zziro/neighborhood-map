@@ -1,13 +1,13 @@
 # neighborhood-map
-Neighborhood maps is an app that allow you to check restaurants that are located around your current position.
+Neighborhood maps is an app wihch allow you to check restaurants ocated around your current position.
 
 ## Stack technologies:
 
-Knockout: To bing  information into UI <br />
+Knockout: For bing  information into UI <br />
 Bootstrap: For styling <br />
-Jquery: To make callbacks<br />
+Jquery: For making callbacks<br />
 
-## Instalation
+## Installation
 
 ### Cloning from git repository:
 
@@ -15,16 +15,16 @@ Jquery: To make callbacks<br />
 * Change directory to project folder.
 * Clone the project inside project folder: 
 	git clone https://github.com/zziro/neighborhood-map.git
-* Once you do that, find the index.html file and open it with your. favorite browser.
+* Once you do that, find the index.html file and open it with your favorite browser.
 
 ### Downloading ZIP file
 
 * Download the project clicking on 'Clone or Download' button.
 * Click on Download ZIP.
 * Uncompress the ZIP file and find the index.html.
-* Open  the index.html file and opent it with your browser.
+* Find the index.html file and opent it with your browser.
 
-### References:
+## References:
 
 1.- [Knockout Docs] <br />
 2.- [Google Maps API - Events] <br />
