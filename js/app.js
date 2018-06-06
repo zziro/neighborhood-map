@@ -276,7 +276,7 @@ function initApp() {
                  data:{
                     categoryId: "4d4b7105d754a06374d81259",
                     ll: "-12.088593,-77.036646",
-                    limit: "100",
+                    limit: "10",
                     radius: "600",
                     client_id: client_id,
                     client_secret: client_secret,
