@@ -1,7 +1,4 @@
-const CLIENT_ID = "NDR1ZOVF3Z0MBQQ5JD4MSJP5VV4XJPH3QZ2YYDTMBZOB2FGA";
-const CLIENT_SECRET = "A5WYXL4YFJQX0KUBPIW50B0DBW5KQA3K5YZQ5MNZ2AJ015US";
 
-var appViewModel;
 
 var restaurantArray = [
             {
@@ -216,9 +213,14 @@ var restaurantArray = [
             }
         ];
 
-
 var map;
 var markers = [];
+
+var Location = function(data) {    
+    this.name = data.name;
+    this.location = data.location;
+    this.show = ko.observable(true);
+}
 
 function initApp() {   
     
@@ -231,14 +233,12 @@ function initApp() {
     });
     
     var infoWindow = new google.maps.InfoWindow();
-
     
     for (j = 0; j < restaurantArray.length; j++) {
         (function() {
             
             var name = restaurantArray[j].name;
             var location = restaurantArray[j].location;
-
             
             var marker = new google.maps.Marker({
                 position: location,
@@ -249,32 +249,41 @@ function initApp() {
             });
             
             markers.push(marker);
-            appViewModel.restaurantList()[j].marker = marker;
+            viewModel.restaurantList()[j].marker = marker;
             marker.addListener('click', function() {                
                 populateInfoWindow(this, infoWindow);                
-                infoWindow.setContent(contentString);
+                infoWindow.setContent(content);
             });
-
-            var foursquareUrl = "https://api.foursquare.com/v2/venues/search?categoryId=4d4b7105d754a06374d81259&ll=-12.088593,-77.036646&limit=15&radius=600&client_id=CLIENT_ID&client_secret=CLIENT_SECRET&v=20180604";
-            var venue, address, category, foursquareId, contentString;
+            
+            var venue, address, category, foursquareId, popup;
+            categoryId = "4d4b7105d754a06374d81259"
+            client_id = "TQOANLZT4UKVO4VMPP0CNHWXLDLRO5E2D5FNFISEET5LU0FF";
+            client_secret = "JDYKZHISWT2QHBWWDV304VQFKDSICZ1KW5C5NDHDRYLUZPY2";
             
             $.ajax({                
-                url: foursquareUrl,
-                dataType: "json",                
-                success: function(data) {                             
+                url: 'https://api.foursquare.com/v2/venues/search',
+                dataType: "json",
+                data:{
+                    categoryId: categoryId,
+                    ll: "-12.088593,-77.036646",
+                    limit: "100",
+                    radius: "600",
+                    client_id: client_id,
+                    client_secret: client_secret,
+                    v: "20180605"
+                },           
+                success: function(data) {                    
                     venue = data.response.venues[0];                    
                     address = venue.location.formattedAddress[0];                    
-                    category = venue.categories[0].name;                    
                     foursquareId = "https://foursquare.com/v/" + venue.id;                    
-                    contentString = "<div class='name'>" + "Name: " + "<span class='info'>" + name + "</span></div>" +
-                        "<div class='category'>" + "Catergory: " + "<span class='info'>" + category + "</span></div>" +
-                        "<div class='address'>" + "Location: " + "<span class='info'>" + address + "</span></div>" +
-                        "<div class='information'>" + "More info: " + "<a href='" + foursquareId + "'>" + "Click here" + "</a></div>";
+                    content = "<div class='name'>" + "Name: " + "<span class='info'>" + name + "</span></div>" +
+                              "<div class='address'>" + "Location: " + "<span class='info'>" + address + "</span></div>" +
+                              "<div class='information'>" + "Go to Web: " + "<a href='" + foursquareId + "'>" + "Click here" + "</a></div>";
 
-                    marker.contentString;
+                    marker.content;
                 },
                 error: function() {
-                    contentString = "<div class='name'>Data is currently not available. Please try again.</div>";
+                    content = "<div class='name'>Data is currently not available. Please try again.</div>";
                 }
             });
 
@@ -286,11 +295,11 @@ function initApp() {
 function populateInfoWindow(marker, infoWindow) {                
     if (infoWindow.marker != marker) {
         infoWindow.marker = marker;
-        infoWindow.setContent('<div class="name">' + marker.name + '</div>' + marker.contentString);                    
+        infoWindow.setContent('<div class="name">' + marker.name + '</div>' + marker.content);                    
         marker.setAnimation(google.maps.Animation.BOUNCE);
         setTimeout(function() {
             marker.setAnimation(null);
-        }, 2130);
+        }, 3000);
         infoWindow.open(map, marker);                    
         infoWindow.addListener('closeclick', function() {
             infoWindow.setMarker = null;
@@ -299,19 +308,10 @@ function populateInfoWindow(marker, infoWindow) {
 } 
 
 function showException() {
-    alert("Map could not be loaded at this moment. Please try again");
+    alert("There is problem with authentincation process.");
 }
 
-// Location Constructor
-var Location = function(data) {
-    var self = this;
-    this.name = data.name;
-    this.location = data.location;
-    this.show = ko.observable(true);
-};
-
-// VIEW MODEL //
-var AppViewModel = function() {
+var viewModel = function() {
     var self = this;    
     this.restaurantList = ko.observableArray();
     this.filteredInput = ko.observable('');    
@@ -338,11 +338,11 @@ var AppViewModel = function() {
         }
     });
 
-    this.showLocation = function(locations) {
+    this.showPlace = function(locations) {
         google.maps.event.trigger(locations.marker, 'click');
     };
 };
 
-appViewModel = new AppViewModel();
+viewModel = new viewModel();
 
-ko.applyBindings(appViewModel);
+ko.applyBindings(viewModel);
