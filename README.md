@@ -24,13 +24,12 @@ Jquery: For making callbacks<br />
 * Uncompress the ZIP file and find the index.html.
 * Find the index.html file and opent it with your browser.
 
-## References:
+## Refferences:
 
 1.- [Knockout Docs] <br />
 2.- [Google Maps API - Events] <br />
 3.- [Foursquare API - venues] <br />
 4.- [Jquery AJAX] <br />
-
 
 [Google Maps API - Events]:https://developers.google.com/maps/documentation/javascript/examples/event-simple
 [Knockout Docs]:http://knockoutjs.com/documentation/introduction.html
