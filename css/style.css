@@ -21,7 +21,7 @@ body {
 	font-weight: bold;
 }
 
-.name, .category, .address, .information {
+.name, .address, .information {
 	font-family: "Arial", sans-serif;
 	color: #000;
 	font-weight: bold;
