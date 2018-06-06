@@ -7,11 +7,9 @@
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="utf-8">
-	
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">	
-	
-	<!-- Main CSS Stylesheet -->
+
+	<!--Loading tools to UI experience -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<link href="css/style.css" rel="stylesheet">
 	
 	<title>Neighborhood Restaurant's Map</title>
@@ -21,18 +19,24 @@
 <body>
 
 	<nav class="col-sm-3 col-md-3">
-	<input type="search" id="search-input" placeholder="Search" data-bind="textInput: filterName">
-	<ul  data-bind="foreach: places">
-		<p><a href="#" data-bind="text: name, click: $parent.showPlace,  visible: show"></a></p>
-	</ul>	  	
+		<!-- Input to filter restaurants-->
+		<input type="search" id="search-input" placeholder="Search" data-bind="textInput: filterName">
+		<ul  data-bind="foreach: places">
+			<p><a href="#" data-bind="text: name, click: $parent.showPlace,  visible: show"></a></p>
+		</ul>	  	
 	</nav>
-	
+
+	<!-- Google Map system-->
 	<div id="map" class="map"></div>
 	
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>	
+	<!-- JQUERY to make AJAX callbacks-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+	<!-- Library to bind info-->	
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>	
 	<script src="js/app.js"></script>
 	
+	<!-- Authentication to load Google's Map System -->
    	<script async defer src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDuKxucpK6fpd_o1b6efP5np46MVa7QPEk&callback=initApp" onerror="showException()"></script>
 </body>
 

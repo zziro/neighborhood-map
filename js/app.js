@@ -1,3 +1,4 @@
+//List of restaurants by default
 var restaurantArray = [
             {
                 "id": "4b8f02e6f964a520674433e3",
@@ -212,7 +213,7 @@ var restaurantArray = [
             }
         ];
 
-
+//client_id and client_secret 
 var client_id = "X3EKGO02E3FTDXSX5A1QPS3P1A25EGJDZY20G5QFDXXDVHAP";
 var client_secret = "0R2GJ4T0QVZ2WP4F04EDECUFSAGJJCIEQA3ZNMXVKL5OW5RP";
 
@@ -222,23 +223,30 @@ var markers = [];
 var foursquareUrl = "https://api.foursquare.com/v2/venues/search";
 var venue, address, contentString;
 
+//Location's constructor
 var Location = function(data) {    
     this.name = data.name;
     this.location = data.location;
     this.show = ko.observable(true);
 }
 
+//Main function that is called after authentication
 function initApp() {
+
+    //Current postition
     var myLatLng = {
         lat: -12.088593,
         lng: -77.036646        
     };
+
     map = new google.maps.Map(document.getElementById("map"), {
         center: myLatLng,
         zoom: 15
     });
+
     var infoWindow = new google.maps.InfoWindow();
 
+    //Goinf through defaul list and generating makers    
     for (j = 0; j < restaurantArray.length; j++) {
         (function() {
             var name = restaurantArray[j].name;
@@ -255,11 +263,13 @@ function initApp() {
 
             viewModel.places()[j].marker = marker;
 
+            //Trigger a window with restaurant's information
             marker.addListener('click', function() {
-                populateInfoWindow(this, infoWindow);
+                showInfo(this, infoWindow);
                 infoWindow.setContent(contentString);
             });
 
+            //Making a AJAX call to load places from foursquare
             $.ajax({
                 url: foursquareUrl,
                 dataType: "json",
@@ -287,7 +297,8 @@ function initApp() {
     }
 }
 
-function populateInfoWindow(marker, infoWindow) {
+//Populated info once the user make a click at the marker
+function showInfo(marker, infoWindow) {
     if (infoWindow.marker != marker) {
         infoWindow.marker = marker;
         infoWindow.setContent('<div>' + marker.title + '</div>' + marker.contentString);                    
@@ -302,19 +313,23 @@ function populateInfoWindow(marker, infoWindow) {
     }
 } 
 
+//If for some reason there are problems with the google authentication
 function showException() {
     alert("There is problem with authentincation process.");
 }
 
+//Model
 var viewModel = function() {
     var self = this;    
     this.places = ko.observableArray();
     this.filterName = ko.observable('');    
 
+    //Binding places into html
     for (i = 0; i < restaurantArray.length; i++) {        
         self.places.push(new Location(restaurantArray[i]));
     }
     
+    //Search functionality
     this.searchFilter = ko.computed(function() {
         var filter = self.filterName().toLowerCase();        
         for (j = 0; j < self.places().length; j++) {     
@@ -331,11 +346,14 @@ var viewModel = function() {
         }
     });
 
+    //Show places afte click in the default list
     this.showPlace = function(locations) {
         google.maps.event.trigger(locations.marker, 'click');
     };
 };
 
+//Instanciate the viewModel
 viewModel = new viewModel();
 
+//Activate knockout to allow binding
 ko.applyBindings(viewModel);
