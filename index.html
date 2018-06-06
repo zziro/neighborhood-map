@@ -21,8 +21,8 @@
 <body>
 
 	<nav class="col-sm-3 col-md-3">
-	<input type="search" id="search-input" placeholder="Search" data-bind="textInput: filteredInput">
-	<ul  data-bind="foreach: restaurantList">
+	<input type="search" id="search-input" placeholder="Search" data-bind="textInput: filterName">
+	<ul  data-bind="foreach: places">
 		<p><a href="#" data-bind="text: name, click: $parent.showPlace,  visible: show"></a></p>
 	</ul>	  	
 	</nav>

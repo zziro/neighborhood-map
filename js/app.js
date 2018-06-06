@@ -1,5 +1,8 @@
 
 
+client_id = "TQOANLZT4UKVO4VMPP0CNHWXLDLRO5E2D5FNFISEET5LU0FF";
+client_secret = "JDYKZHISWT2QHBWWDV304VQFKDSICZ1KW5C5NDHDRYLUZPY2";
+
 var restaurantArray = [
             {
                 "name": "Tip Top",
@@ -244,27 +247,23 @@ function initApp() {
                 position: location,
                 map: map,
                 name: name,
-                animation: google.maps.Animation.DROP,
-                address: address
+                animation: google.maps.Animation.DROP
             });
-            
+
             markers.push(marker);
-            viewModel.restaurantList()[j].marker = marker;
+
+            viewModel.places()[j].marker = marker;
             marker.addListener('click', function() {                
                 populateInfoWindow(this, infoWindow);                
                 infoWindow.setContent(content);
             });
             
-            var venue, address, category, foursquareId, popup;
-            categoryId = "4d4b7105d754a06374d81259"
-            client_id = "TQOANLZT4UKVO4VMPP0CNHWXLDLRO5E2D5FNFISEET5LU0FF";
-            client_secret = "JDYKZHISWT2QHBWWDV304VQFKDSICZ1KW5C5NDHDRYLUZPY2";
-            
+            var venue, address, foursquareId;
             $.ajax({                
                 url: 'https://api.foursquare.com/v2/venues/search',
                 dataType: "json",
                 data:{
-                    categoryId: categoryId,
+                    categoryId: "4d4b7105d754a06374d81259",
                     ll: "-12.088593,-77.036646",
                     limit: "100",
                     radius: "600",
@@ -278,12 +277,12 @@ function initApp() {
                     foursquareId = "https://foursquare.com/v/" + venue.id;                    
                     content = "<div class='name'>" + "Name: " + "<span class='info'>" + name + "</span></div>" +
                               "<div class='address'>" + "Location: " + "<span class='info'>" + address + "</span></div>" +
-                              "<div class='information'>" + "Go to Web: " + "<a href='" + foursquareId + "'>" + "Click here" + "</a></div>";
+                              "<div class='information'>" + "Web: " + "<a href='" + foursquareId + "'>" + "Click here" + "</a></div>";
 
                     marker.content;
                 },
                 error: function() {
-                    content = "<div class='name'>Data is currently not available. Please try again.</div>";
+                    content = "<div class='name'>Unable to load data.</div>";
                 }
             });
 
@@ -313,27 +312,25 @@ function showException() {
 
 var viewModel = function() {
     var self = this;    
-    this.restaurantList = ko.observableArray();
-    this.filteredInput = ko.observable('');    
+    this.places = ko.observableArray();
+    this.filterName = ko.observable('');    
 
-    for (i = 0; i < restaurantArray.length; i++) {
-        var place = new Location(restaurantArray[i]);
-        self.restaurantList.push(place);
+    for (i = 0; i < restaurantArray.length; i++) {        
+        self.places.push(new Location(restaurantArray[i]));
     }
     
     this.searchFilter = ko.computed(function() {
-        var filter = self.filteredInput().toLowerCase();        
-        for (j = 0; j < self.restaurantList().length; j++) {     
-            if (self.restaurantList()[j].name.toLowerCase().indexOf(filter) > -1) {
-                self.restaurantList()[j].show(true);
-                if (self.restaurantList()[j].marker) {
-                    self.restaurantList()[j].marker.setVisible(true); 
+        var filter = self.filterName().toLowerCase();        
+        for (j = 0; j < self.places().length; j++) {     
+            if (self.places()[j].name.toLowerCase().indexOf(filter) > -1) {
+                self.places()[j].show(true);
+                if (self.places()[j].marker) {
+                    self.places()[j].marker.setVisible(true); 
                 }
             } else {
-                self.restaurantList()[j].show(false);
-                if (self.restaurantList()[j].marker) {
-                    self.restaurantList()[j].marker.setVisible(false); 
-                }
+                self.places()[j].show(false);                
+                self.places()[j].marker.setVisible(false); 
+                
             }
         }
     });
