@@ -1,5 +1,5 @@
 # neighborhood-map
-Neighborhood maps is an app wihch allow you to check restaurants ocated around your current position.
+Neighborhood maps is an app wihch allow you to check restaurants located around your current position.
 
 ## Stack technologies:
 
@@ -23,6 +23,11 @@ Jquery: For making callbacks<br />
 * Click on Download ZIP.
 * Uncompress the ZIP file and find the index.html.
 * Find the index.html file and opent it with your browser.
+
+## Neighborhood
+![alt text][neighborhood_mapp]
+
+[neighborhood_mapp]: 
 
 ## Refferences:
 
